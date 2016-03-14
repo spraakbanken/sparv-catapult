@@ -1,0 +1,4 @@
+MAILTO=""
+1 0 * * * curl http://spraakbanken.gu.se/ws/korp/annotate/cleanup
+*/5 * * * * /export/res/lb/korpus/tools/annotate/annotation-lab/catapult/keep-alive.sh
+1 3 * * * /export/res/lb/korpus/tools/annotate/annotation-lab/catapult/update-saldo.sh
