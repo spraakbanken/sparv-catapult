@@ -314,14 +314,14 @@ def start(socket_path, processes=1, verbose='false',
             lexicon_dict[os.path.basename(lexicon).rstrip(".pickle")] = saldo.SaldoLexicon(lexicon)
         annotators['sb.saldo'] = set_last_argument(lexicon_dict)(saldo.annotate)
 
-    if compound_model:
-        annotators['sb.compound_simple'] = set_last_argument(
-            compound_simple.SaldoLexicon(compound_model))(compound_simple.annotate)
-
     if stats_model and compound_model:
         annotators['sb.compound'] = set_last_argument(
             compound.SaldoCompLexicon(compound_model),
             compound.StatsLexicon(stats_model))(compound.annotate)
+
+    elif compound_model:
+        annotators['sb.compound_simple'] = set_last_argument(
+            compound_simple.SaldoLexicon(compound_model))(compound_simple.annotate)
 
     # if models_1700s:
     #     models = models_1700s.split()
