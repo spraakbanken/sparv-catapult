@@ -18,7 +18,7 @@ PROCESSES=1
 VERBOSE=true
 
 mkdir -p $BUILDS_DIR -m 777 -v
-cp $CATAPULT_DIR/Makefile* $BUILDS_DIR -v
+cp $CATAPULT_DIR/Makefile.* $BUILDS_DIR -v
 cp $CATAPULT_DIR/catalaunch $BUILDS_DIR -v
 chmod 755 $BUILDS_DIR/catalaunch -v
 
@@ -42,3 +42,6 @@ echo "Catapult pid: $!"
 # Waiting for socket to get created
 inotifywait -e create $BUILDS_DIR
 chmod 777 $PIPELINE_SOCK -v
+
+# Anpassning för att köra med Supervisord
+wait -n
