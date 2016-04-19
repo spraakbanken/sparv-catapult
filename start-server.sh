@@ -18,7 +18,9 @@ PROCESSES=1
 VERBOSE=true
 
 mkdir -p $BUILDS_DIR -m 777 -v
-cp $CATAPULT_DIR/Makefile.* $BUILDS_DIR -v
+cp $SB_MAKEFILES/Makefile.rules $BUILDS_DIR -v
+cp $SB_MAKEFILES/Makefile.config $BUILDS_DIR -v
+cp $SB_MAKEFILES/Makefile.langs $BUILDS_DIR -v
 cp $CATAPULT_DIR/catalaunch $BUILDS_DIR -v
 chmod 755 $BUILDS_DIR/catalaunch -v
 
@@ -43,5 +45,5 @@ echo "Catapult pid: $!"
 inotifywait -e create $BUILDS_DIR
 chmod 777 $PIPELINE_SOCK -v
 
-# Anpassning för att köra med Supervisord
+# Adapted to be run with Supervisord
 wait -n
