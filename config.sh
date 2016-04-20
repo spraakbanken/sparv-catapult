@@ -1,11 +1,18 @@
 #!/bin/bash
 
+# BACKEND and PIPELINE are not needed by the catapult
+BACKEND="/export/htdocs_sbws/ws/sparv/v1"
+PIPELINE="${BACKEND}/pipeline"
+
+### The remaining variables must be set! ###
 # paths to modules and models in the pipeline
-SB_PYTHON="/export/res/lb/korpus/tools/annotate/python"
-SB_MODELS="/export/res/lb/korpus/tools/annotate/models"
-SB_BIN="/export/res/lb/korpus/tools/annotate/bin"
-SB_MAKEFILES=""
+SB_PYTHON="${PIPELINE}/python"
+SB_MODELS="${PIPELINE}/models"
+SB_BIN="${PIPELINE}/bin"
+
+# paths to makefiles needed by the pipeline
+SB_MAKEFILES="${HOME}/makefiles"
 
 # catapult and builds directory
-CATAPULT_DIR="/export/res/lb/korpus/tools/annotate/annotation-lab/catapult"
-BUILDS_DIR="/export/htdocs_sb/annoteringslabb/builds"
+CATAPULT_DIR="${HOME}/catapult"
+BUILDS_DIR="${BACKEND}/builds"
