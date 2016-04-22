@@ -20,7 +20,6 @@ VERBOSE=true
 mkdir -p $BUILDS_DIR -m 777 -v
 cp $SB_MAKEFILES/Makefile.rules $BUILDS_DIR -v
 cp $SB_MAKEFILES/Makefile.config $BUILDS_DIR -v
-cp $SB_MAKEFILES/Makefile.langs $BUILDS_DIR -v
 cp $CATAPULT_DIR/catalaunch $BUILDS_DIR -v
 chmod 755 $BUILDS_DIR/catalaunch -v
 
