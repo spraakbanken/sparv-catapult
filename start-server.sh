@@ -2,7 +2,7 @@
 source config.sh
 
 export PYTHONPATH=$SB_PYTHON${PYTHONPATH:+:$PYTHONPATH}
-export PATH=$SB_BIN:/usr/local/cwb-3.4.5/bin:/usr/local/bin:$PATH
+export PATH=$SB_BIN:/usr/local/cwb-3.4.5/bin:/usr/local/bin:${HOME}/.local/bin:$PATH
 export SB_MODELS=$SB_MODELS
 
 SALDO_MODEL=$SB_MODELS/saldo.pickle
