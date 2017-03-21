@@ -1,25 +1,25 @@
 #!/bin/bash
 source config.sh
 
-export PYTHONPATH=$SB_PYTHON${PYTHONPATH:+:$PYTHONPATH}
-export PATH=$SB_BIN:/usr/local/cwb-3.4.5/bin:/usr/local/bin:${HOME}/.local/bin:$PATH
-export SB_MODELS=$SB_MODELS
+export PYTHONPATH=$SPARV_PYTHON${PYTHONPATH:+:$PYTHONPATH}
+export PATH=$SPARV_BIN:/usr/local/cwb-3.4.5/bin:/usr/local/bin:${HOME}/.local/bin:$PATH
+export SPARV_MODELS=$SPARV_MODELS
 
-SALDO_MODEL=$SB_MODELS/saldo.pickle
-DALIN_MODEL=$SB_MODELS/dalin.pickle
-SWEDBERG_MODEL=$SB_MODELS/swedberg.pickle
-SALDO_COMPOUND_MODEL=$SB_MODELS/saldo.compound.pickle
-STATISTIC_MODEL=$SB_MODELS/stats.pickle
+SALDO_MODEL=$SPARV_MODELS/saldo.pickle
+DALIN_MODEL=$SPARV_MODELS/dalin.pickle
+SWEDBERG_MODEL=$SPARV_MODELS/swedberg.pickle
+SALDO_COMPOUND_MODEL=$SPARV_MODELS/saldo.compound.pickle
+STATISTIC_MODEL=$SPARV_MODELS/stats.pickle
 
-MALT_JAR=$SB_BIN/maltparser-1.7.2/maltparser-1.7.2.jar
-MALT_MODEL=$SB_MODELS/swemalt-1.7.2.mco
+MALT_JAR=$SPARV_BIN/maltparser-1.7.2/maltparser-1.7.2.jar
+MALT_MODEL=$SPARV_MODELS/swemalt-1.7.2.mco
 
 PROCESSES=1
 VERBOSE=true
 
 mkdir -p $BUILDS_DIR -m 777 -v
-cp $SB_MAKEFILES/Makefile.rules $BUILDS_DIR -v
-cp $SB_MAKEFILES/Makefile.config $BUILDS_DIR -v
+cp $SPARV_MAKEFILES/Makefile.rules $BUILDS_DIR -v
+cp $SPARV_MAKEFILES/Makefile.config $BUILDS_DIR -v
 cp $CATAPULT_DIR/catalaunch $BUILDS_DIR -v
 chmod 755 $BUILDS_DIR/catalaunch -v
 
