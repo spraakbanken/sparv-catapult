@@ -4,6 +4,9 @@
 BACKEND="/export/htdocs_sbws/ws/sparv/v1"
 PIPELINE="${BACKEND}/pipeline"
 
+# Path to virtualenv, optional
+# CATAPULT_VENV=""
+
 ### The remaining variables must be set! ###
 # paths to modules, models and makefiles in the pipeline
 SPARV_PYTHON="${PIPELINE}/python"
