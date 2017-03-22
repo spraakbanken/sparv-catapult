@@ -1,7 +1,7 @@
 #!/bin/bash
 source config.sh
 
-export PYTHONPATH=$SPARV_PYTHON${PYTHONPATH:+:$PYTHONPATH}
+export PYTHONPATH=$SPARV_PYTHON:$PYTHONPATH
 export PATH=$SPARV_BIN:/usr/local/cwb-3.4.5/bin:/usr/local/bin:${HOME}/.local/bin:$PATH
 export SPARV_MODELS=$SPARV_MODELS
 
@@ -16,6 +16,9 @@ MALT_MODEL=$SPARV_MODELS/swemalt-1.7.2.mco
 
 PROCESSES=1
 VERBOSE=true
+
+# Start virtualenv
+if [ -z ${var+x} ]; then source $CATAPULT_VENV/bin/activate; fi
 
 mkdir -p $BUILDS_DIR -m 777 -v
 cp $SPARV_MAKEFILES/Makefile.rules $BUILDS_DIR -v
@@ -45,4 +48,4 @@ inotifywait -e create $BUILDS_DIR
 chmod 777 $PIPELINE_SOCK -v
 
 # Adapted to be run with Supervisord
-wait -n
+wait
