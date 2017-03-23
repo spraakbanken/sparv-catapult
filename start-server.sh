@@ -4,6 +4,7 @@ source config.sh
 export PYTHONPATH=$SPARV_PYTHON:$PYTHONPATH
 export PATH=$SPARV_BIN:/usr/local/cwb-3.4.5/bin:/usr/local/bin:${HOME}/.local/bin:$PATH
 export SPARV_MODELS=$SPARV_MODELS
+export SPARV_MAKEFILES=$SPARV_MAKEFILES
 
 # Model locations
 SALDO_MODEL=$SPARV_MODELS/saldo.pickle
@@ -23,8 +24,6 @@ if [ -z ${var+x} ]; then source $CATAPULT_VENV/bin/activate; fi
 
 mkdir -p $BUILDS_DIR -m 777 -v
 mkdir -p $LOGDIR -m 777 -v
-cp $SPARV_MAKEFILES/Makefile.rules $BUILDS_DIR -v
-cp $SPARV_MAKEFILES/Makefile.config $BUILDS_DIR -v
 cp $CATAPULT_DIR/catalaunch $BUILDS_DIR -v
 chmod 755 $BUILDS_DIR/catalaunch -v
 
