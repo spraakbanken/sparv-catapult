@@ -5,6 +5,7 @@ export PYTHONPATH=$SPARV_PYTHON:$PYTHONPATH
 export PATH=$SPARV_BIN:/usr/local/cwb-3.4.5/bin:/usr/local/bin:${HOME}/.local/bin:$PATH
 export SPARV_MODELS=$SPARV_MODELS
 
+# Model locations
 SALDO_MODEL=$SPARV_MODELS/saldo.pickle
 DALIN_MODEL=$SPARV_MODELS/dalin.pickle
 SWEDBERG_MODEL=$SPARV_MODELS/swedberg.pickle
@@ -21,6 +22,7 @@ VERBOSE=true
 if [ -z ${var+x} ]; then source $CATAPULT_VENV/bin/activate; fi
 
 mkdir -p $BUILDS_DIR -m 777 -v
+mkdir -p $LOGDIR -m 777 -v
 cp $SPARV_MAKEFILES/Makefile.rules $BUILDS_DIR -v
 cp $SPARV_MAKEFILES/Makefile.config $BUILDS_DIR -v
 cp $CATAPULT_DIR/catalaunch $BUILDS_DIR -v
@@ -40,7 +42,7 @@ python $CATAPULT_DIR/catapult.py \
     --malt_model $MALT_MODEL \
     --compound_model $SALDO_COMPOUND_MODEL \
     --stats_model $STATISTIC_MODEL \
-    --verbose $VERBOSE &> $BUILDS_DIR/catalog &
+    --verbose $VERBOSE &> $LOGDIR/cata.log &
 echo "Catapult pid: $!"
 
 # Waiting for socket to get created
