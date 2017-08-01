@@ -2,6 +2,7 @@
 source config.sh
 
 export PYTHONPATH=$SPARV_PYTHON:$PYTHONPATH
+echo "PYTHONPATH:" $PYTHONPATH
 export PATH=$SPARV_BIN:/usr/local/cwb-3.4.5/bin:/usr/local/bin:${HOME}/.local/bin:$PATH
 export SPARV_MODELS=$SPARV_MODELS
 export SPARV_MAKEFILES=$SPARV_MAKEFILES
@@ -21,7 +22,7 @@ VERBOSE=true
 
 # Start define python bin (with or without virtualenv)
 if [ -z ${CATAPULT_VENV+x} ]; then
-    PYTHON=python3
+    PYTHON=python
 else
     source $CATAPULT_VENV/bin/activate
     PYTHON=$CATAPULT_VENV/bin/python
@@ -54,4 +55,4 @@ inotifywait -e create $BUILDS_DIR
 chmod 777 $PIPELINE_SOCK -v
 
 # Adapted to be run with Supervisord
-wait
+# wait

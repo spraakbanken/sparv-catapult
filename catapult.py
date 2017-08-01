@@ -7,7 +7,7 @@
 #
 # Run scripts in the catapult with the c program catalaunch.
 
-from builtins import range, object
+# from builtins import range, object  # Uncomment for python3!
 from multiprocessing import Process, cpu_count
 from decorator import decorator
 
