@@ -19,8 +19,13 @@ MALT_MODEL=$SPARV_MODELS/swemalt-1.7.2.mco
 PROCESSES=1
 VERBOSE=true
 
-# Start virtualenv
-if [ -z ${var+x} ]; then source $CATAPULT_VENV/bin/activate; fi
+# Start define python bin (with or without virtualenv)
+if [ -z ${CATAPULT_VENV+x} ]; then
+    PYTHON=python3
+else
+    source $CATAPULT_VENV/bin/activate
+    PYTHON=$CATAPULT_VENV/bin/python
+fi
 
 mkdir -p $BUILDS_DIR -m 777 -v
 mkdir -p $LOGDIR -m 777 -v
@@ -31,7 +36,7 @@ PIPELINE_SOCK=$BUILDS_DIR/pipeline.sock
 rm -fv $PIPELINE_SOCK
 
 echo "Starting catapult on socket $PIPELINE_SOCK in background"
-python $CATAPULT_DIR/catapult.py \
+$PYTHON $CATAPULT_DIR/catapult.py \
     --socket_path $PIPELINE_SOCK \
     --processes $PROCESSES \
     --saldo_model $SALDO_MODEL \
