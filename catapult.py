@@ -7,6 +7,7 @@
 #
 # Run scripts in the catapult with the c program catalaunch.
 
+from builtins import range, object
 from multiprocessing import Process, cpu_count
 from decorator import decorator
 
@@ -330,7 +331,7 @@ def start(socket_path, processes=1, verbose='false',
     #     annotators[('sb.fsv', '--annotate_full')] = set_last_argument(lexicons)(fsv.annotate_full)
 
     if verbose:
-        log.info('Loaded annotators: %s', annotators.keys())
+        log.info('Loaded annotators: %s', list(annotators.keys()))
 
     if malt_jar and malt_model:
         malt_args = dict(maltjar=malt_jar, model=malt_model,
@@ -345,7 +346,7 @@ def start(socket_path, processes=1, verbose='false',
 
     # Start processes-1 workers
     workers = [Process(target=worker, args=[server_socket, verbose, annotators, malt_args])
-               for i in xrange(processes - 1)]
+               for i in range(processes - 1)]
 
     for p in workers:
         p.start()
