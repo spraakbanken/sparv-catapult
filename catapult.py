@@ -7,7 +7,7 @@
 #
 # Run scripts in the catapult with the c program catalaunch.
 
-# from builtins import range, object  # Uncomment for python3!
+from builtins import range, object
 from multiprocessing import Process, cpu_count
 from decorator import decorator
 
@@ -71,6 +71,7 @@ def handle(client_sock, verbose, annotators):
         """
         Sends a message chunk until it is totally received in the other end
         """
+        msg = msg.encode(util.UTF8)
         while len(msg) > 0:
             sent = client_sock.send(msg)
             if sent == 0:
@@ -108,10 +109,10 @@ def handle(client_sock, verbose, annotators):
         return cleanup
 
     # Receive data
-    data = ""
+    data = b""
     new_data = None
     # Message is terminated with a lone \
-    while new_data is None or new_data[-1] != '\\':
+    while new_data is None or not new_data.endswith(b'\\'):
         new_data = client_sock.recv(RECV_LEN)
         log.debug("Received %s", new_data)
         data += new_data
@@ -125,7 +126,8 @@ def handle(client_sock, verbose, annotators):
 
     # Split arguments on spaces, and replace '\ ' to ' ' and \\ to \
     args = [arg.replace('\\ ', ' ').replace('\\\\', '\\')
-            for arg in re.split(splitter, data)]
+            for arg in re.split(splitter, data.decode(util.UTF8))]
+    log.debug("Args: %s", args)
 
     ### PING? ###
     if len(args) == 2 and args[1] == "PING":
