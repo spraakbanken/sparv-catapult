@@ -1,11 +1,8 @@
 #!/bin/bash
 
 # BACKEND and PIPELINE are not needed by the catapult
-BACKEND="/export/htdocs_sbws/ws/sparv/v1"
-PIPELINE="${BACKEND}/pipeline"
-
-# Path to virtualenv, optional
-# CATAPULT_VENV=""
+BACKEND="${HOME}/sparvlabb/backend-v2"
+PIPELINE="${BACKEND}/data/pipeline"
 
 ### The remaining variables must be set! ###
 # paths to modules, models and makefiles in the pipeline
@@ -15,6 +12,10 @@ SPARV_BIN="${PIPELINE}/bin"
 SPARV_MAKEFILES="${PIPELINE}/makefiles"
 
 # catapult, builds and log directory
-CATAPULT_DIR="${HOME}/catapult"
-BUILDS_DIR="${BACKEND}/builds"
-LOGDIR="${BUILDS_DIR}/log"
+CATAPULT_DIR="${BACKEND}/data/catapult"
+BUILDS_DIR="${BACKEND}/data/builds"
+LOGDIR="${BACKEND}/logs"
+
+# Path to virtualenv, optional
+CATAPULT_VENV="${CATAPULT_DIR}/venv"
+
