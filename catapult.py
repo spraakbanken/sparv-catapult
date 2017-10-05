@@ -269,9 +269,9 @@ def worker(server_socket, verbose, annotators, malt_args=None, swener_args=None)
 
 def start(socket_path, processes=1, verbose='false',
           saldo_model=None, compound_model=None, stats_model=None,
-          dalin_model=None, swedberg_model=None,
+          dalin_model=None, swedberg_model=None, blingbring_model=None,
           malt_jar=None, malt_model=None, malt_encoding=util.UTF8,
-          swener=False, swener_encoding=util.UTF8):
+          sentiment_model=None, swener=False, swener_encoding=util.UTF8):
     """
     Starts a catapult on a socket file, using a number of processes.
 
@@ -325,6 +325,18 @@ def start(socket_path, processes=1, verbose='false',
     elif compound_model:
         annotators['sb.compound_simple'] = set_last_argument(
             compound_simple.SaldoLexicon(compound_model))(compound_simple.annotate)
+
+    # if blingbring_model:
+    #     annotators['sb.lexical_classes'] = set_last_argument(
+    #         util.PickledLexicon(blingbring_model))(lexical_classes.annotate_bb_words)
+
+    # if swefn_model:
+    #     annotators['sb.lexical_classes'] = set_last_argument(
+    #         util.PickledLexicon(swefn_model))(lexical_classes.annotate_swefn_words)
+
+    if sentiment_model:
+        annotators['sb.sentiment'] = set_last_argument(
+            util.PickledLexicon(sentiment_model))(sentiment.sentiment)
 
     # if models_1700s:
     #     models = models_1700s.split()

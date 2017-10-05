@@ -2,8 +2,7 @@
 source config.sh
 
 export PYTHONPATH=$SPARV_PYTHON:$PYTHONPATH
-echo "PYTHONPATH:" $PYTHONPATH
-export PATH=$SPARV_BIN:/usr/local/cwb-3.4.5/bin:/usr/local/bin:${HOME}/.local/bin:$PATH:$HOME/bin
+export PATH=$SPARV_BIN:/usr/local/cwb-3.4.5/bin:${HOME}/.local/bin:/usr/local/bin:$PATH
 export SPARV_MODELS=$SPARV_MODELS
 export SPARV_MAKEFILES=$SPARV_MAKEFILES
 
@@ -12,6 +11,9 @@ SALDO_MODEL=$SPARV_MODELS/saldo.pickle
 DALIN_MODEL=$SPARV_MODELS/dalin.pickle
 SWEDBERG_MODEL=$SPARV_MODELS/swedberg.pickle
 SALDO_COMPOUND_MODEL=$SPARV_MODELS/saldo.compound.pickle
+BLINGBRING_MODEL=$SPARV_MODELS/blingbring.pickle
+SWEFN_MODEL=$SPARV_MODELS/swefn.pickle
+SENTIMENT_MODEL=$SPARV_MODELS/sensaldo.pickle
 STATISTIC_MODEL=$SPARV_MODELS/stats.pickle
 
 MALT_JAR=$SPARV_BIN/maltparser-1.7.2/maltparser-1.7.2.jar
@@ -46,6 +48,9 @@ $PYTHON $CATAPULT_DIR/catapult.py \
     --malt_jar $MALT_JAR \
     --malt_model $MALT_MODEL \
     --compound_model $SALDO_COMPOUND_MODEL \
+    --sentiment_model $SENTIMENT_MODEL \
+    --blingbring_model $BLINGBRING_MODEL \
+    --swefn_model $SWEFN_MODEL \
     --stats_model $STATISTIC_MODEL \
     --verbose $VERBOSE &> $LOGDIR/cata.log &
 echo "Catapult pid: $!"
