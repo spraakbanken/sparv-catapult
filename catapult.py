@@ -271,7 +271,8 @@ def start(socket_path, processes=1, verbose='false',
           saldo_model=None, compound_model=None, stats_model=None,
           dalin_model=None, swedberg_model=None, blingbring_model=None,
           malt_jar=None, malt_model=None, malt_encoding=util.UTF8,
-          sentiment_model=None, swener=False, swener_encoding=util.UTF8):
+          sentiment_model=None, swefn_model=None, swener=False,
+          swener_encoding=util.UTF8):
     """
     Starts a catapult on a socket file, using a number of processes.
 
