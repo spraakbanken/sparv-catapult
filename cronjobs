@@ -1,4 +1,4 @@
 MAILTO=""
-1 0 * * * curl https://ws/spraakbanken.gu.se/ws/sparv/v1/cleanup
-*/5 * * * * /home/fksparv/catapult/keep-alive.sh
-1 3 * * * /home/fksparv/catapult/update-saldo.sh
+1 0 * * * curl https://ws.spraakbanken.gu.se/ws/sparv/cleanup?secret_key=SECRETKEY
+*/5 * * * * /export/htdocs_sbws/ws/sparv/v2/data/catapult/keep-alive.sh
+1 3 * * * /export/htdocs_sbws/ws/sparv/v2/data/catapult/update-saldo.sh
