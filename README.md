@@ -13,7 +13,7 @@ is adapted for usage with the Sparv backend (flask application).
 
 1. Build the catalaunch binary:
 
-    `make -C catapult`
+    `make`
 
 2. Create python virtual environment for catapult (not required but recommended):
 
