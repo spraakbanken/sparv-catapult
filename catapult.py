@@ -2,7 +2,7 @@
 # catapult: runs python scripts in already running processes to eliminate the
 # python interpreter startup time.
 #
-# The lexicon for sb.saldo.annotate and sb.saldo.compound can be pre-loaded and
+# The lexicon for sparv.saldo.annotate and sparv.saldo.compound can be pre-loaded and
 # shared between processes. See the variable annotators in handle and start.
 #
 # Run scripts in the catapult with the c program catalaunch.
@@ -18,7 +18,7 @@ import runpy
 import socket
 import sys
 import traceback
-import sb.util as util
+import sparv.util as util
 
 RECV_LEN = 4096
 
@@ -26,8 +26,8 @@ RECV_LEN = 4096
 # it upon request, introducing new delays.
 #
 # These imports uses the __all__ variables in the __init__ files.
-from sb.util import *
-from sb import *
+from sparv.util import *
+from sparv import *
 
 logging.basicConfig(format="%(process)d %(asctime)-15s %(message)s")
 log = logging.getLogger(__name__)
@@ -43,11 +43,11 @@ def set_last_argument(*values):
     """
     Decorates a function f, setting its last argument(s) to the given value(s).
 
-    Used for setting the saldo lexicons to sb.saldo.annotate and
-    sb.saldo.compound, and the process "dictionary" to sb.malt.maltparse.
+    Used for setting the saldo lexicons to sparv.saldo.annotate and
+    sparv.saldo.compound, and the process "dictionary" to sparv.malt.maltparse.
 
     The decorator module is used to give the same signature and
-    docstring to the function, which is exploited in sb.util.run.
+    docstring to the function, which is exploited in sparv.util.run.
     """
     @decorator
     def inner(f, *args, **kwargs):
@@ -225,13 +225,13 @@ def worker(server_socket, verbose, annotators, malt_args=None, swener_args=None)
                 if verbose:
                     log.info('(Re)started malt process: %s', malt_process)
                 process_dict['process'] = malt_process
-                annotators['sb.malt'] = set_last_argument(process_dict)(malt.maltparse)
+                annotators['sparv.malt'] = set_last_argument(process_dict)(malt.maltparse)
 
             elif verbose:
                 log.info("Not restarting malt this time")
 
         start_malt()
-        annotators['sb.malt', 'cleanup'] = start_malt
+        annotators['sparv.malt', 'cleanup'] = start_malt
 
     if swener_args:
         process_dict = dict(process=None, restart=True)
@@ -246,13 +246,13 @@ def worker(server_socket, verbose, annotators, malt_args=None, swener_args=None)
                 if verbose:
                     log.info('(Re)started SweNER process: %s', swener_process)
                 process_dict['process'] = swener_process
-                annotators['sb.swener'] = set_last_argument(process_dict)(swener.tag_ne)
+                annotators['sparv.swener'] = set_last_argument(process_dict)(swener.tag_ne)
 
             elif verbose:
                 log.info("Not restarting SweNER this time")
 
         start_swener()
-        annotators['sb.swener', 'cleanup'] = start_swener
+        annotators['sparv.swener', 'cleanup'] = start_swener
 
     if verbose:
         log.info("Worker running!")
@@ -316,34 +316,34 @@ def start(socket_path, processes=1, verbose='false',
         lexicon_dict = {}
         for lexicon in lexicons:
             lexicon_dict[os.path.basename(lexicon).rstrip(".pickle")] = saldo.SaldoLexicon(lexicon)
-        annotators['sb.saldo'] = set_last_argument(lexicon_dict)(saldo.annotate)
+        annotators['sparv.saldo'] = set_last_argument(lexicon_dict)(saldo.annotate)
 
     if stats_model and compound_model:
-        annotators['sb.compound'] = set_last_argument(
+        annotators['sparv.compound'] = set_last_argument(
             compound.SaldoCompLexicon(compound_model),
             compound.StatsLexicon(stats_model))(compound.annotate)
 
     elif compound_model:
-        annotators['sb.compound_simple'] = set_last_argument(
+        annotators['sparv.compound_simple'] = set_last_argument(
             compound_simple.SaldoLexicon(compound_model))(compound_simple.annotate)
 
     # if blingbring_model:
-    #     annotators['sb.lexical_classes'] = set_last_argument(
+    #     annotators['sparv.lexical_classes'] = set_last_argument(
     #         util.PickledLexicon(blingbring_model))(lexical_classes.annotate_bb_words)
 
     # if swefn_model:
-    #     annotators['sb.lexical_classes'] = set_last_argument(
+    #     annotators['sparv.lexical_classes'] = set_last_argument(
     #         util.PickledLexicon(swefn_model))(lexical_classes.annotate_swefn_words)
 
     if sentiment_model:
-        annotators['sb.sentiment'] = set_last_argument(
+        annotators['sparv.sentiment'] = set_last_argument(
             util.PickledLexicon(sentiment_model))(sentiment.sentiment)
 
     # if models_1700s:
     #     models = models_1700s.split()
     #     lexicons = [saldo.SaldoLexicon(lex) for lex in models]
-    #     annotators[('sb.fsv', '--annotate_fallback')] = set_last_argument(lexicons)(fsv.annotate_fallback)
-    #     annotators[('sb.fsv', '--annotate_full')] = set_last_argument(lexicons)(fsv.annotate_full)
+    #     annotators[('sparv.fsv', '--annotate_fallback')] = set_last_argument(lexicons)(fsv.annotate_fallback)
+    #     annotators[('sparv.fsv', '--annotate_full')] = set_last_argument(lexicons)(fsv.annotate_full)
 
     if verbose:
         log.info('Loaded annotators: %s', list(annotators.keys()))
