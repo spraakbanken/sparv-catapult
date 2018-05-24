@@ -2,7 +2,7 @@
 source config.sh
 
 export PYTHONPATH=$SPARV_PYTHON:$PYTHONPATH
-export PATH=$SPARV_BIN:/usr/local/cwb-3.4.5/bin:${HOME}/.local/bin:/usr/local/bin:$PATH
+export PATH=$SPARV_BIN:/usr/local/cwb-3.4.5/bin:${HOME}/.local/bin:/usr/local/bin:${HOME}/bin:$PATH
 export SPARV_MODELS=$SPARV_MODELS
 export SPARV_MAKEFILES=$SPARV_MAKEFILES
 
