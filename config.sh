@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# BACKEND and PIPELINE are not needed by the catapult
-BACKEND="${HOME}/sparvlabb/backend-v2"
-PIPELINE="${BACKEND}/data/pipeline"
+# BACKEND and PIPELINE are not needed by the catapult (only whithin this file)
+BACKEND="${HOME}/sparv/backend"
+PIPELINE="${BACKEND}/data/sparv-pipeline"
 
 ### The remaining variables must be set! ###
 # paths to modules, models and makefiles in the pipeline
